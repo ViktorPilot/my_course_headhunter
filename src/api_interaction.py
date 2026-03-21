@@ -1,7 +1,7 @@
 import requests
 
 
-def get_api_data_employers(list_employers: list[str]) -> list[tuple]:
+def get_api_data_employers(list_employers: list[str]) -> list[dict]:
     """Получение данных о работодателях через API"""
     url = 'https://api.hh.ru/employers'
     list_data_employers = []
@@ -10,30 +10,32 @@ def get_api_data_employers(list_employers: list[str]) -> list[tuple]:
         response = requests.get(url, params=params)
         if response.status_code == 200:
             for i in response.json().get('items', {}):
+                company_id = i.get('id', None)
                 vacancy_url = i.get('vacancies_url', None)
                 count_vacancyes = i.get('open_vacancies', None)
-                tuple_company = (employeer, vacancy_url, count_vacancyes)
-                list_data_employers.append(tuple_company)
+                dict_company = {'company_id': company_id, 'company_name': employeer, 'company_url': vacancy_url, 'count_vacancyes': count_vacancyes}
+                list_data_employers.append(dict_company)
         else:
             print(f'Ошибка при получении данных о работодателе {employeer}: {response.status_code}')
             continue
     return list_data_employers
 
 
-def get_api_data_vacancy(list_data_employers: list[tuple]) -> list[tuple]:
+def get_api_data_vacancy(list_data_employers: list[dict]) -> list[dict]:
     """Получение данных о вакансиях работодателей, полученных через API"""
     list_data_vacancy = []
     for employer in list_data_employers:
-        if employer[1] is not None:
-            response = requests.get(employer[1])
+        if employer.get('company_url') is not None:
+            response = requests.get(employer.get('company_url'))
             if response.status_code == 200:
                 for i in response.json().get('items', {}):
-                     data = (employer[0], i.get('name', None),
-                             i.get('area', {}).get('url', None) if i.get('area') is not None else None,
-                             i.get('salary', {}).get('from', None) if i.get('salary') is not None else None,
-                             i.get('salary', {}).get('to', None) if i.get('to') is not None else None,
-                             i.get('address', {}).get('city', None) if i.get('city') is not None else None,
-                             i.get('published_at', None))
+                     data = { 'vacancy': i.get('name', None),
+                              'vacancy_url': i.get('area', {}).get('url', None) if i.get('area') is not None else None,
+                              'salary_from': i.get('salary', {}).get('from', None) if i.get('salary') is not None else None,
+                              'salary_to': i.get('salary', {}).get('to', None) if i.get('to') is not None else None,
+                              'area': i.get('area', {}).get('name', None) if i.get('area') is not None else None,
+                              'published_date': i.get('published_at', None),
+                              'company_id': employer.get('company_id')}
                      list_data_vacancy.append(data)
             else:
                 print(f'Ошибка при получении данных о вакансиях работодателя {employer[0]}: {response.status_code}')
@@ -41,7 +43,3 @@ def get_api_data_vacancy(list_data_employers: list[tuple]) -> list[tuple]:
         else:
             continue
     return list_data_vacancy
-
-
-
-
