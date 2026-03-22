@@ -53,10 +53,10 @@ def get_api_data_vacancy(list_data_employers: list[dict]) -> list[dict]:
 
 
 if __name__ == "__main__":
-    list_employers = [
+    list_employers_ = [
         "Авиакомпания Победа",
         "Уральские авиалинии, Авиакомпания",
     ]
-    list_data_employers_ = get_api_data_employers(list_employers)
+    list_data_employers_ = get_api_data_employers(list_employers_)
     print(list_data_employers_)
     print(get_api_data_vacancy(list_data_employers_))

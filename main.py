@@ -26,15 +26,18 @@ def main(list_employers: list[str], new_database: str, word: str) -> None:
         create_table(conn)
         insert_table(list_data_employers, list_data_vacancy, conn)
         example_1 = DBManager(conn)
-        print("Список названий компаний и количества вакансий в них: ")
-        [print(f"   {i}") for i in example_1.get_companies_and_vacancies_count()]
-        print("Список всех вакансий: ")
-        [print(f"   {i}") for i in example_1.get_all_vacancies()]
-        print(example_1.get_avg_salary())
-        print("Список всех вакансий, у которых зарплата выше средней по всем вакансиям: ")
-        [print(f"   {i}") for i in example_1.get_vacancies_with_higher_salary()]
-        print(f"Список всех вакансий, в названии которых содержится слово '{word}': ")
-        [print(f"   {i}") for i in example_1.get_vacancies_with_keyword(word)]
+        if list_data_employers:
+            print("Список названий компаний и количества вакансий в них: ")
+            [print(f"   {i}") for i in example_1.get_companies_and_vacancies_count()]
+            print("Список всех вакансий: ")
+            [print(f"   {i}") for i in example_1.get_all_vacancies()]
+            print(example_1.get_avg_salary())
+            print("Список всех вакансий, у которых зарплата выше средней по всем вакансиям: ")
+            [print(f"   {i}") for i in example_1.get_vacancies_with_higher_salary()]
+            print(f"Список всех вакансий, в названии которых содержится слово '{word}': ")
+            [print(f"   {i}") for i in example_1.get_vacancies_with_keyword(word)]
+        else:
+            print("Не найдено ни одной компании с заданными названиями.")
     except psycopg2.DatabaseError as e:
         print(f"Ошибка при подключении к базе данных: {e}")
         conn = None

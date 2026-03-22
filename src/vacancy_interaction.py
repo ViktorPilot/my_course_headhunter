@@ -38,7 +38,7 @@ class DBManager:
                             WHERE salary_from > (SELECT AVG(salary_from) FROM vacancy WHERE salary_from IS NOT NULL)"""
         )
         result = self.__cur.fetchall()
-        return [f"Должность: {x[0]}, зарплата: {x[1]}" for x in result]
+        return [f"Должность: {x[0]}, зарплата: {x[1]} руб." for x in result]
 
     def get_vacancies_with_keyword(self, word: str) -> list[str]:
         """Получение списка всех вакансий, в названии которых содержатся переданные в метод слова"""
