@@ -10,7 +10,9 @@ requires-python = ">=3.12"
 dependencies = [
     "requests (>=2.32.5,<3.0.0)",
     "psycopg2 (>=2.9.11,<3.0.0)",
-    "dotenv (>=0.9.9,<0.10.0)"
+    "dotenv (>=0.9.9,<0.10.0)",
+    "types-psycopg2 (>=2.9.21.20260223,<3.0.0.0)",
+    "types-requests (>=2.32.4.20260107,<3.0.0.0)"
 ]
 
 

@@ -653,6 +653,33 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "types-psycopg2"
+version = "2.9.21.20260223"
+description = "Typing stubs for psycopg2"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "types_psycopg2-2.9.21.20260223-py3-none-any.whl", hash = "sha256:c6228ade72d813b0624f4c03feeb89471950ac27cd0506b5debed6f053086bc8"},
+    {file = "types_psycopg2-2.9.21.20260223.tar.gz", hash = "sha256:78ed70de2e56bc6b5c26c8c1da8e9af54e49fdc3c94d1504609f3519e2b84f02"},
+]
+
+[[package]]
+name = "types-requests"
+version = "2.32.4.20260107"
+description = "Typing stubs for requests"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "types_requests-2.32.4.20260107-py3-none-any.whl", hash = "sha256:b703fe72f8ce5b31ef031264fe9395cac8f46a04661a79f7ed31a80fb308730d"},
+    {file = "types_requests-2.32.4.20260107.tar.gz", hash = "sha256:018a11ac158f801bfa84857ddec1650750e393df8a004a8a9ae2a9bec6fcb24f"},
+]
+
+[package.dependencies]
+urllib3 = ">=2"
+
+[[package]]
 name = "typing-extensions"
 version = "4.15.0"
 description = "Backported and Experimental Type Hints for Python 3.9+"
@@ -685,4 +712,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "779b559ecef83e959d81fc42dc78ddf1079b7fca99274c502af8ce010749636a"
+content-hash = "20cfc1bf6c80399454bb9f9b9bd2249ea8d4a22c07703d907ed09ea105140be5"
