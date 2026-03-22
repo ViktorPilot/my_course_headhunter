@@ -1,4 +1,4 @@
-# Проект my_course_planes
+# Проект my_course_3_hh
 
 ## Описание:
 
